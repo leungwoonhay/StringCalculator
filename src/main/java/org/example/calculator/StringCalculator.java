@@ -8,12 +8,11 @@ public class StringCalculator {
 
     public int Add(String numbers) {
         int result = 0;
-        numbers = numbers.replaceAll("\\s", "");
         stringCalculatorLogger.log(Level.INFO, "Method start");
         if (numbers.equals(""))
             result = 0;
         else {
-            String[] strings = numbers.split(",");
+            String[] strings = numbers.split("[,\\n]");
             for (int i = 0; i < strings.length; i ++)
                 result += Integer.valueOf(strings[i]);
         }
