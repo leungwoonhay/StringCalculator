@@ -32,8 +32,20 @@ public class CalculateTester {
     }
 
     @Test
-    public void testUnknownNumberofNumbers() {
+    public void testUnknownNumberOfNumbers() {
         int result = stringCalculator.Add("1,2,3,4,5");
         Assertions.assertEquals(15, result);
+    }
+
+    @Test
+    public void testNewLines() {
+        int result = stringCalculator.Add("1\n2,3");
+        Assertions.assertEquals(6, result);
+    }
+
+    @Test
+    public void testDifferentDelimiter() {
+        int result = stringCalculator.Add("//;\n1;2");
+        Assertions.assertEquals(3, result);
     }
 }
