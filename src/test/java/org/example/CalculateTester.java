@@ -30,4 +30,10 @@ public class CalculateTester {
         int result = stringCalculator.Add("1,2");
         Assertions.assertEquals(3, result);
     }
+
+    @Test
+    public void testUnknownNumberofNumbers() {
+        int result = stringCalculator.Add("1,2,3,4,5");
+        Assertions.assertEquals(15, result);
+    }
 }
