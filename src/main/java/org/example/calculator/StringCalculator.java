@@ -18,6 +18,11 @@ public class StringCalculator {
         else {
             if (numbers.startsWith("//")) {
                 String[] parts = numbers.substring(2).split("\n");
+                if (parts[0].contains("[") && numbers.contains("]")) {
+                    String delimiters = getStringBetweenTwoCharacters(parts[0], "[", "]");
+                    parts[0] = "\\" + delimiters.charAt(0);
+                    parts[1] = removeDuplicateChar(parts[1], delimiters);
+                }
                 result = addNumbers(parts[1], parts[0]);
             }
             else {
@@ -32,6 +37,7 @@ public class StringCalculator {
         List<String> negativeNumber = new ArrayList<>();
 
         String[] strings = numbers.split(delimiter);
+
         for (int i = 0; i < strings.length; i ++)
             if (Integer.valueOf(strings[i]) < 0)
                 negativeNumber.add(strings[i]);
@@ -49,5 +55,15 @@ public class StringCalculator {
         }
 
         return result;
+    }
+
+    public static String getStringBetweenTwoCharacters(String input, String to, String from)
+    {
+        return input.substring(input.indexOf(to) + 1, input.lastIndexOf(from));
+    }
+
+    public static String removeDuplicateChar(String input, String delimiters) {
+
+        return input.replace(delimiters, delimiters.substring(0, 1));
     }
 }
