@@ -74,4 +74,15 @@ public class CalculateTester {
         Assertions.assertEquals(6, result);
     }
 
+    @Test
+    public void testMultiDelimiters() throws NegativeNotAllowedException {
+        int result = stringCalculator.Add("//[|][%]\n1|2%3");
+        Assertions.assertEquals(6, result);
+    }
+
+    @Test
+    public void testMultiDelimitersOfAnyLength () throws NegativeNotAllowedException {
+        int result = stringCalculator.Add("//[|||][%%%]\n1|||2%%%3");
+        Assertions.assertEquals(6, result);
+    }
 }
