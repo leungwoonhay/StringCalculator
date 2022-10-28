@@ -36,7 +36,8 @@ public class StringCalculator {
             if (Integer.valueOf(strings[i]) < 0)
                 negativeNumber.add(strings[i]);
             else
-                result += Integer.valueOf(strings[i]);
+                if (Integer.valueOf(strings[i]) <= 1000)
+                    result += Integer.valueOf(strings[i]);
 
         if (negativeNumber.size() > 0) {
             String message = "Negatives not allowed: ";
