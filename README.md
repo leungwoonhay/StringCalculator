@@ -17,15 +17,15 @@ The String Calculator calculates the sum of the integers provided in the string.
 3. Open the application in an IDE of your choice
 
 ## Example
-1.1. "" returns 0
-1.2. "1" returns 1
-1.3. "1,2" returns 3
-2.1. "1,2,3,4,5" returns 15
-3.1. "1\n2,3" returns 6
-4.1. "//;\n1;2" returns 3
-5.1. "-1,2" throws "Negatives not allowed: -1"
-5.2. "2,-4,3,-5" throws "Negatives not allowed: -4,-5"
-6.1. "1001,2" returns 2
-7.1. "//[|||]\n1|||2|||3" returns 6
-8.1. "//[|][%]\n1|2%3" returns 6
-9.1. "//[|||][%%%]\n1|||2%%%3" returns 6
+1. "" returns 0
+2. "1" returns 1
+3. "1,2" returns 3
+4. "1,2,3,4,5" returns 15
+5. "1\n2,3" returns 6
+6. "//;\n1;2" returns 3
+7. "-1,2" throws "Negatives not allowed: -1"
+8. "2,-4,3,-5" throws "Negatives not allowed: -4,-5"
+9. "1001,2" returns 2
+10. "//[|||]\n1|||2|||3" returns 6
+11. "//[|][%]\n1|2%3" returns 6
+12. "//[|||][%%%]\n1|||2%%%3" returns 6
