@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static Logger stringCalculatorLogger = Logger.getLogger("stringCalculatorLogger");
@@ -13,21 +15,25 @@ public class StringCalculator {
     public int Add(String numbers) throws NegativeNotAllowedException {
         int result = 0;
         stringCalculatorLogger.log(Level.INFO, "Method start");
-        if (numbers.equals(""))
-            result = 0;
-        else {
+        if (!numbers.equals("")) {
             if (numbers.startsWith("//")) {
                 String[] parts = numbers.substring(2).split("\n");
+
                 if (parts[0].contains("[") && numbers.contains("]")) {
-                    String delimiters = getStringBetweenTwoCharacters(parts[0], "[", "]");
-                    parts[0] = "\\" + delimiters.charAt(0);
-                    parts[1] = removeDuplicateChar(parts[1], delimiters);
+                    List<String> delimiters = getdelimiters(parts[0]);
+                    parts[0] = "[";
+                    for (String delimiter : delimiters)
+                        parts[0] += delimiter;
+                    parts[0] += "]";
+
+                    for (String delimiter : delimiters)
+                        parts[1] = removeDuplicateChar(parts[1], delimiter);
                 }
+
                 result = addNumbers(parts[1], parts[0]);
             }
-            else {
+            else
                 result = addNumbers(numbers, "[,\\n]");
-            }
         }
         return result;
     }
@@ -35,7 +41,6 @@ public class StringCalculator {
     public int addNumbers(String numbers, String delimiter) throws NegativeNotAllowedException {
         int result = 0;
         List<String> negativeNumber = new ArrayList<>();
-
         String[] strings = numbers.split(delimiter);
 
         for (int i = 0; i < strings.length; i ++)
@@ -47,8 +52,10 @@ public class StringCalculator {
 
         if (negativeNumber.size() > 0) {
             String message = "Negatives not allowed: ";
+
             for (int i = 0; i < negativeNumber.size(); i ++)
                 message += negativeNumber.get(i) + ",";
+
             message = message.substring(0, message.length() - 1);
 
             throw new NegativeNotAllowedException(message);
@@ -57,13 +64,19 @@ public class StringCalculator {
         return result;
     }
 
-    public static String getStringBetweenTwoCharacters(String input, String to, String from)
+    public static List<String> getdelimiters(String input)
     {
-        return input.substring(input.indexOf(to) + 1, input.lastIndexOf(from));
+        List<String> delimiters = new ArrayList<>();
+        Pattern regex = Pattern.compile("\\[(.*?)\\]");
+        Matcher regexMatcher = regex.matcher(input);
+
+        while (regexMatcher.find())
+            delimiters.add(regexMatcher.group(1));
+
+        return delimiters;
     }
 
     public static String removeDuplicateChar(String input, String delimiters) {
-
         return input.replace(delimiters, delimiters.substring(0, 1));
     }
 }
