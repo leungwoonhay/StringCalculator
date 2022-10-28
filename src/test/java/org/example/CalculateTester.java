@@ -67,4 +67,11 @@ public class CalculateTester {
         int result = stringCalculator.Add("1001,2");
         Assertions.assertEquals(2, result);
     }
+
+    @Test
+    public void testDelimitersAnyLength() throws NegativeNotAllowedException {
+        int result = stringCalculator.Add("//[|||]\n1|||2|||3");
+        Assertions.assertEquals(6, result);
+    }
+
 }
